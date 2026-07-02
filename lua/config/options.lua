@@ -65,6 +65,9 @@ opt.colorcolumn = "89"
 -- Splits
 opt.splitright = true
 
+-- Hide the `~` end-of-buffer filler lines
+opt.fillchars:append({ eob = " " })
+
 -- Misc parity with vimrc
 opt.updatetime = 100
 opt.showmode = false
