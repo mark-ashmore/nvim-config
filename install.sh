@@ -48,6 +48,15 @@ if ! brew list --cask font-meslo-lg-nerd-font >/dev/null 2>&1; then
   brew install --cask font-meslo-lg-nerd-font
 fi
 
+echo "==> Verifying Nerd Font files are actually installed"
+if find /Library/Fonts ~/Library/Fonts -iname "MesloLG*NerdFont*.ttf" 2>/dev/null | grep -q .; then
+  echo "    Found Meslo Nerd Font files."
+else
+  echo "    WARNING: no Meslo Nerd Font files found in /Library/Fonts or ~/Library/Fonts." >&2
+  echo "    Diagnostic icons, devicons and statusline glyphs will render as boxes" >&2
+  echo "    without it. Try: brew reinstall --cask font-meslo-lg-nerd-font" >&2
+fi
+
 echo "==> Syncing plugins headlessly (this may take a minute)"
 nvim --headless "+Lazy! sync" +qa
 
