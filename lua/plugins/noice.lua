@@ -29,9 +29,26 @@ return {
         size = { width = 60, height = "auto" },
       },
     },
+    -- Route hover/signature-help through noice's renderer so `K` and
+    -- signature help match the popup look instead of Neovim's plain
+    -- default float, matching the gruvbox-themed borders elsewhere
+    lsp = {
+      override = {
+        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+        ["vim.lsp.util.stylize_markdown"] = true,
+        ["cmp.entry.get_documentation"] = true,
+      },
+      hover = { enabled = true },
+      signature = { enabled = true },
+    },
     presets = {
       bottom_search = true,
       long_message_to_split = true,
+      -- Combines the cmdline popup and its completion menu into one
+      -- aligned block, the common "command palette" look
+      command_palette = true,
+      -- Consistent bordered floats for LSP hover/signature-help docs
+      lsp_doc_border = true,
     },
   },
 }
