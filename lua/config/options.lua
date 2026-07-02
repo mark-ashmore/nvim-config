@@ -76,3 +76,15 @@ opt.shortmess:append("F")
 opt.mouse = "a"
 opt.signcolumn = "yes"
 opt.encoding = "utf-8"
+
+-- Nerd Font icons for gutter diagnostics instead of the default E/W/I/H
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+  },
+})
