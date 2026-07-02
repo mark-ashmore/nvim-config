@@ -71,3 +71,19 @@ map("t", "<Esc>", "<C-\\><C-n>")
 -- Open a terminal in a bottom split, like vimrc's `cabbrev bterm bo term`
 vim.api.nvim_create_user_command("Bterm", "botright terminal", {})
 vim.cmd("cabbrev bterm Bterm")
+
+-- Reload options/keymaps/autocmds without restarting nvim. Only covers
+-- lua/config/*.lua (plain vim.opt/keymap/autocmd scripts); plugin changes
+-- under lua/plugins/*.lua need `:Lazy reload <plugin-name>` instead, since
+-- lazy.nvim tracks each plugin's own loaded/config state separately.
+vim.api.nvim_create_user_command("ReloadConfig", function()
+  for name, _ in pairs(package.loaded) do
+    if name:match("^config%.") then
+      package.loaded[name] = nil
+    end
+  end
+  require("config.options")
+  require("config.keymaps")
+  require("config.autocmds")
+  vim.notify("Reloaded config.options / config.keymaps / config.autocmds")
+end, { desc = "Reload lua/config/*.lua without restarting nvim" })
