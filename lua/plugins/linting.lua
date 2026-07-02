@@ -1,12 +1,12 @@
--- Diagnostics on save, matching VS Code's pylint, vscode-markdownlint and
--- code-spell-checker extensions
+-- Diagnostics on save, matching VS Code's vscode-markdownlint and
+-- code-spell-checker extensions (python linting comes from the ruff LSP
+-- configured in lsp.lua instead of nvim-lint)
 return {
   "mfussenegger/nvim-lint",
   event = { "BufWritePost", "BufReadPost" },
   config = function()
     local lint = require("lint")
     lint.linters_by_ft = {
-      python = { "pylint" },
       markdown = { "markdownlint-cli2", "cspell" },
       gitcommit = { "cspell" },
     }
