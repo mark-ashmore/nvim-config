@@ -1,5 +1,5 @@
 -- Format-on-save, matching VS Code's editor.formatOnSave with
--- black-formatter (python) and prettier-vscode (js/ts/json/yaml/html/css/md)
+-- ruff (python) and prettier-vscode (js/ts/json/yaml/html/css/md)
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
@@ -15,7 +15,7 @@ return {
   },
   opts = {
     formatters_by_ft = {
-      python = { "isort", "black" },
+      python = { "isort", "ruff_format" },
       javascript = { "prettier" },
       typescript = { "prettier" },
       javascriptreact = { "prettier" },

@@ -64,7 +64,7 @@ Done. Notes:
   - Set your terminal font to "MesloLGL Nerd Font" (or "MesloLGL Nerd Font Mono")
     for icons to render correctly, matching your VS Code terminal font.
   - Run `:checkhealth` inside nvim to verify everything is wired up.
-  - LSP servers, formatters (black/isort/prettier/clang-format/stylua) and
+  - LSP servers, formatters (ruff/isort/prettier/clang-format/stylua) and
     linters (pylint/markdownlint/cspell) install automatically via Mason on
     first launch; run `:Mason` to check progress or add more.
   - clangd and sourcekit-lsp are picked up from the Xcode command line tools.
