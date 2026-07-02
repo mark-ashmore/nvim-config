@@ -23,6 +23,20 @@ return {
         vim.lsp.enable(server)
       end
 
+      -- Ruff's own defaults only enable E4/E7/E9/F (a small pyflakes-ish
+      -- slice). Broaden it here so it actually replaces the breadth of
+      -- pylint's default checks: naming (N), pyupgrade (UP), bugbear (B),
+      -- simplify (SIM), complexity (C90) and ruff's own pylint port (PL).
+      vim.lsp.config("ruff", {
+        init_options = {
+          settings = {
+            lint = {
+              select = { "E", "W", "F", "I", "N", "UP", "B", "SIM", "C90", "PL" },
+            },
+          },
+        },
+      })
+
       -- ruff handles python linting/imports/quick-fixes; let pyright keep
       -- owning hover and type-based completion so they don't fight over it
       vim.api.nvim_create_autocmd("LspAttach", {
