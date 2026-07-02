@@ -24,6 +24,8 @@ return {
         DiagnosticSignWarn = { fg = "#fabd2f", bg = "NONE" },
         DiagnosticSignInfo = { fg = "#83a598", bg = "NONE" },
         DiagnosticSignHint = { fg = "#8ec07c", bg = "NONE" },
+        -- Same bg1 mismatch for the foldcolumn strip left of the gutter
+        FoldColumn = { bg = "NONE" },
       },
     })
     vim.o.background = "dark"
