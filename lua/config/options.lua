@@ -31,6 +31,11 @@ opt.foldcolumn = "1"
 opt.relativenumber = true
 opt.number = true
 
+-- Highlight only the current line's number (CursorLineNr), not the whole
+-- line, matching VS Code's editor.renderLineHighlight = "gutter"
+opt.cursorline = true
+opt.cursorlineopt = "number"
+
 -- Colors
 opt.termguicolors = true
 opt.background = "dark"
