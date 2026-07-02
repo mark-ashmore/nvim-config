@@ -77,14 +77,16 @@ opt.mouse = "a"
 opt.signcolumn = "yes"
 opt.encoding = "utf-8"
 
--- Nerd Font icons for gutter diagnostics instead of the default E/W/I/H
+-- Nerd Font icons for gutter diagnostics instead of the default E/W/I/H.
+-- Written as \u{} escapes (not pasted raw glyphs) since raw PUA characters
+-- silently turned into empty strings when this file was previously saved.
 vim.diagnostic.config({
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN] = "",
-      [vim.diagnostic.severity.INFO] = "",
-      [vim.diagnostic.severity.HINT] = "",
+      [vim.diagnostic.severity.ERROR] = "\u{f057}", -- nf-fa-times_circle
+      [vim.diagnostic.severity.WARN] = "\u{f071}", -- nf-fa-exclamation_triangle
+      [vim.diagnostic.severity.INFO] = "\u{f05a}", -- nf-fa-info_circle
+      [vim.diagnostic.severity.HINT] = "\u{f0eb}", -- nf-fa-lightbulb_o
     },
   },
 })
