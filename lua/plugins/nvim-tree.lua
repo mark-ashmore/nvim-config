@@ -3,10 +3,13 @@
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- Load eagerly so it can hijack netrw before VimEnter, e.g. for `nvim .`
+  lazy = false,
   keys = {
     { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file explorer" },
   },
   opts = {
+    disable_netrw = true,
     view = { width = 32 },
     renderer = {
       highlight_git = true,
