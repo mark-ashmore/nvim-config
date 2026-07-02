@@ -64,3 +64,10 @@ map("n", "<leader>pp", ":setlocal paste!<cr>")
 -- Sort a JSON buffer/selection by key, matching richie5um2.vscode-sort-json
 map("n", "<leader>js", ":%!jq -S .<cr>", { desc = "Sort JSON buffer" })
 map("v", "<leader>js", ":!jq -S .<cr>", { desc = "Sort JSON selection" })
+
+-- Escape terminal mode like a normal Esc, instead of <C-\><C-n>
+map("t", "<Esc>", "<C-\\><C-n>")
+
+-- Open a terminal in a bottom split, like vimrc's `cabbrev bterm bo term`
+vim.api.nvim_create_user_command("Bterm", "botright terminal", {})
+vim.cmd("cabbrev bterm Bterm")
