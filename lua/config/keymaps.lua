@@ -72,6 +72,14 @@ map("t", "<Esc>", "<C-\\><C-n>")
 vim.api.nvim_create_user_command("Bterm", "botright terminal", {})
 vim.cmd("cabbrev bterm Bterm")
 
+-- `git diff` (or `git diff <args>`) in a bottom terminal, rendered through
+-- delta (core.pager = delta) exactly like in the shell, since :terminal
+-- always allocates a real pty
+vim.api.nvim_create_user_command("Gdiff", function(opts)
+  vim.cmd("botright terminal git diff " .. opts.args)
+end, { nargs = "*", desc = "git diff through delta in a bottom split" })
+map("n", "<leader>gD", ":Gdiff<cr>", { desc = "git diff (delta)" })
+
 -- Reload options/keymaps/autocmds without restarting nvim. Only covers
 -- lua/config/*.lua (plain vim.opt/keymap/autocmd scripts); plugin changes
 -- under lua/plugins/*.lua need `:Lazy reload <plugin-name>` instead, since

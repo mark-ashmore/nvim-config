@@ -26,6 +26,10 @@ if [ "$CONFIG_DIR" != "$TARGET" ]; then
   fi
 fi
 
+echo "==> Linking lazygit config (delta as diff pager)"
+mkdir -p "$HOME/.config/lazygit"
+ln -sf "$CONFIG_DIR/lazygit/config.yml" "$HOME/.config/lazygit/config.yml"
+
 if ! command -v brew >/dev/null 2>&1; then
   echo "==> Homebrew not found, installing"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -36,7 +40,7 @@ echo "==> Installing packages via Homebrew"
 # node/npm and jq are needed by Mason-installed tools (prettier, markdownlint,
 # cspell) and the JSON-sort keymap, respectively. clangd/sourcekit-lsp come
 # from Xcode command line tools (xcode-select --install), not Homebrew.
-brew install neovim git ripgrep fd lazygit tree-sitter-cli node jq
+brew install neovim git ripgrep fd lazygit tree-sitter-cli node jq git-delta
 
 if ! xcode-select -p >/dev/null 2>&1; then
   echo "==> Xcode command line tools not found, installing (needed for clangd/sourcekit-lsp)"
@@ -77,4 +81,8 @@ Done. Notes:
     linters (pylint/markdownlint/cspell) install automatically via Mason on
     first launch; run `:Mason` to check progress or add more.
   - clangd and sourcekit-lsp are picked up from the Xcode command line tools.
+  - lazygit is configured to use delta as its diff pager. If you want git
+    diff/log/show to render through delta everywhere (shell, :Bterm,
+    :Gdiff), set `git config --global core.pager delta` and your preferred
+    delta options (see https://dandavison.github.io/delta/configuration.html).
 EOF
