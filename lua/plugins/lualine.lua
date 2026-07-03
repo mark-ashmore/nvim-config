@@ -39,7 +39,12 @@ return {
         lualine_a = { { "mode", color = mode_color } },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { { "filename", path = 1 } },
-        lualine_x = { "filetype" },
+        lualine_x = {
+          -- LSP progress (e.g. Pyright "Analyzing files"), quieter than
+          -- noice's popup toasts; blank when nothing is in progress
+          { function() return vim.lsp.status() end },
+          "filetype",
+        },
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },

@@ -33,6 +33,11 @@ return {
     -- signature help match the popup look instead of Neovim's plain
     -- default float, matching the gruvbox-themed borders elsewhere
     lsp = {
+      progress = {
+        -- LSP progress ($/progress, e.g. Pyright "Analyzing files") shows
+        -- in the lualine LSP status component instead of as popup toasts
+        enabled = false,
+      },
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
         ["vim.lsp.util.stylize_markdown"] = true,
