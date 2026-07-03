@@ -1,3 +1,10 @@
+-- Briefly flash yanked text so it's visually obvious what got copied
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
 -- Restore cursor to last edit position when reopening a file
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function()

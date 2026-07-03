@@ -77,6 +77,9 @@ opt.mouse = "a"
 opt.signcolumn = "yes"
 opt.encoding = "utf-8"
 
+-- Prompt to save instead of erroring when :q-ing a buffer with unsaved changes
+opt.confirm = true
+
 -- Nerd Font icons for gutter diagnostics instead of the default E/W/I/H.
 -- Written as \u{} escapes (not pasted raw glyphs) since raw PUA characters
 -- silently turned into empty strings when this file was previously saved.
