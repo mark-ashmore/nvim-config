@@ -45,13 +45,55 @@ return {
           if client and client.name == "ruff" then
             client.server_capabilities.hoverProvider = false
           end
+          -- Turn on inlay hints (types/parameter names) for any server that
+          -- supports them; lua_ls and ts_ls need their hint categories
+          -- explicitly opted into below, otherwise they report the
+          -- capability but send back nothing. Pyright doesn't implement
+          -- inlay hints at all (that's a Pylance-only feature upstream).
+          if client and client:supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+          end
         end,
+      })
+
+      -- lua_ls: enable its inlay hint categories (off by default)
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            hint = { enable = true },
+          },
+        },
+      })
+
+      -- ts_ls: enable its inlay hint categories (off by default)
+      vim.lsp.config("ts_ls", {
+        settings = {
+          typescript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayVariableTypeHints = true,
+            },
+          },
+          javascript = {
+            inlayHints = {
+              includeInlayParameterNameHints = "all",
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayVariableTypeHints = true,
+            },
+          },
+        },
       })
 
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover docs" })
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+      vim.keymap.set("n", "<leader>uh", function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+        vim.lsp.inlay_hint.enable(not enabled, { bufnr = bufnr })
+      end, { desc = "Toggle inlay hints" })
     end,
   },
   {
