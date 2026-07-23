@@ -27,4 +27,8 @@ require("lazy").setup({
   install = { colorscheme = { "gruvbox" } },
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },
+  -- No plugin here declares a `rocks` dependency; hererocks fails to
+  -- bootstrap on this machine and its luarocks check errors in
+  -- :checkhealth for no reason.
+  rocks = { enabled = false },
 })
