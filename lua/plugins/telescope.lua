@@ -19,6 +19,23 @@ return {
       defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.6,
+          },
+        },
+        preview = {
+          filetype_hook = function(_, _, opts)
+            if opts.winid then
+              vim.wo[opts.winid].number = true
+              vim.wo[opts.winid].relativenumber = false
+            end
+            return true
+          end,
+        },
       },
     })
     pcall(telescope.load_extension, "fzf")

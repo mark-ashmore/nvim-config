@@ -29,6 +29,14 @@ return {
       cpp = { "clang_format" },
       lua = { "stylua" },
     },
+    formatters = {
+      -- Wrap markdown prose at printWidth. --prose-wrap only affects
+      -- markdown; --print-width 80 matches prettier's default so other
+      -- filetypes (js/ts/json/yaml/html/css) are unchanged.
+      prettier = {
+        prepend_args = { "--prose-wrap", "always", "--print-width", "80" },
+      },
+    },
     format_on_save = {
       timeout_ms = 1000,
       lsp_format = "fallback",
